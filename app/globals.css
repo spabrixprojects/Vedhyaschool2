@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.5rem;
+
+  /* Parampara & Prana heritage palette */
+  --cream: #f9f6f0;
+  --maroon: #18221b;
+  --saffron: #b85a24;
+  --gold: #c38a35;
+  --ink: #090e0a;
+
+  --background: var(--cream);
+  --foreground: var(--maroon);
+}
+
+.dark {
+  --background: var(--ink);
+  --foreground: var(--cream);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  section, footer {
+    scroll-snap-align: start;
+  }
+}
+
+@layer utilities {
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes slow-rotate {
+  to { transform: rotate(360deg); }
+}
+.animate-slow-rotate {
+  animation: slow-rotate 120s linear infinite;
+}
