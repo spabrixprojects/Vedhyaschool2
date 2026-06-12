@@ -28,19 +28,31 @@ function FacultyCard({ s, i }: { s: StaffMember; i: number }) {
       className="group relative bg-white border border-maroon/5 rounded-2xl overflow-hidden flex flex-col shadow-md hover:shadow-lg transition-all duration-300 h-full font-sans text-maroon"
     >
       <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-maroon to-ink">
-        {/* Faculty Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={s.image}
-            alt={s.name}
-            fill
-            className="w-full h-full object-cover object-top"
-            sizes="320px"
-          />
-        </div>
+        {/* Faculty Image or Video */}
+        {s.videoUrl ? (
+          <div className="absolute inset-0 bg-black">
+            <iframe
+              src={s.videoUrl}
+              title={`${s.name} Video`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        ) : (
+          <div className="absolute inset-0">
+            <Image
+              src={s.image}
+              alt={s.name}
+              fill
+              className="w-full h-full object-cover object-top"
+              sizes="320px"
+            />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent pointer-events-none" />
         {/* Pillar tag */}
-        <div className="absolute top-4 left-4 bg-ink/75 backdrop-blur-sm text-[9px] font-bold tracking-wider uppercase text-gold px-2.5 py-1 rounded-full z-20">
+        <div className="absolute top-4 left-4 bg-ink/75 backdrop-blur-sm text-[9px] font-bold tracking-wider uppercase text-gold px-2.5 py-1 rounded-full z-20 pointer-events-none">
           {s.pillar}
         </div>
 
@@ -52,7 +64,7 @@ function FacultyCard({ s, i }: { s: StaffMember; i: number }) {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
-              className="absolute inset-0 bg-ink/80 backdrop-blur-md border border-white/10 p-6 flex flex-col justify-start text-cream overflow-y-auto scrollbar-none z-10"
+              className="absolute inset-0 bg-ink/80 backdrop-blur-md border border-white/10 p-6 flex flex-col justify-start text-cream overflow-y-auto scrollbar-none z-30"
             >
               <div className="flex justify-between items-center mb-3">
                 <span className="text-[9px] font-bold tracking-[0.15em] text-gold uppercase">
@@ -77,21 +89,6 @@ function FacultyCard({ s, i }: { s: StaffMember; i: number }) {
                       <span>{c}</span>
                     </div>
                   ))}
-                </div>
-              )}
-
-              {s.videoUrl && (
-                <div className="mt-5 pt-4 border-t border-white/10">
-                  <div className="text-[10px] font-bold tracking-wider text-gold uppercase mb-3">Featured Video</div>
-                  <div className="relative aspect-video rounded-lg overflow-hidden border border-white/10 shadow-lg">
-                    <iframe
-                      src={s.videoUrl}
-                      title={`${s.name} Video`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    />
-                  </div>
                 </div>
               )}
             </motion.div>
