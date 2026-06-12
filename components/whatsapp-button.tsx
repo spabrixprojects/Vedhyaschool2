@@ -24,7 +24,7 @@ export function WhatsAppButton() {
 
   const handleClick = () => {
     const phoneNumber = "919249027951"; // Official Vedhya School contact number
-    const message = "Hello Vedhya School, I would like to get in touch.";
+    const message = "Hello Vedhya School.";
     const encodedText = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
     
